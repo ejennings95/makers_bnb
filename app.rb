@@ -2,6 +2,8 @@ require 'sinatra/base'
 require 'sinatra/flash'
 require_relative './spec/test_database'
 require_relative './lib/database_setup'
+require_relative './lib/properties'
+require_relative './lib/property_owner'
 
 class Makersbnb < Sinatra::Base
     register Sinatra::Flash
@@ -12,6 +14,7 @@ class Makersbnb < Sinatra::Base
     end
 
     get ('/browse') do
+      @property_list = Properties.list
       erb(:property_list)
     end
 
