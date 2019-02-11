@@ -30,5 +30,9 @@ class Makersbnb < Sinatra::Base
       erb(:log_in)
     end
 
+    get ('/myproperties') do
+      @property_list = Properties.list
+    end
+
   run! if app_file == $0
 end
