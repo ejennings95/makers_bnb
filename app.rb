@@ -11,7 +11,7 @@ class Makersbnb < Sinatra::Base
       erb(:index)
     end
 
-    get ('/browse')
+    get ('/browse') do
       erb(:property_list)
     end
 

@@ -17,4 +17,9 @@ def self.add(name:, description:, price:, location:, property_owner_id:, dates_b
   Properties.new(id: result[0]['id'], name: result[0]['name'], description: result[0]['description'], price: result[0]['price'], location: result[0]['location'], property_owner_id: result[0]['property_owner_id'], dates_booked: result[0]['dates_booked'])
 end
 
+def self.list
+  Database.query( "SELECT * FROM properties" ).map do | row |
+    Properties.new(id: row['id'], name: row['name'], description: row['description'], price: row['price'], location: row['location'], property_owner_id: row['property_owner_id'], dates_booked: row['dates_booked'])
+    end
+  end
 end

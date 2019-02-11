@@ -27,4 +27,8 @@ describe Properties do
     property = Properties.add(name: 'name', description: 'description', price: 10, location: 'location', property_owner_id: property_owner.id, dates_booked: '2018-04-15')
     expect(property.dates_booked).to eq '2018-04-15'
   end
+
+  it 'should be able to list all the properties' do
+    expect { Properties.add(name: 'name', description: 'description', price: 10, location: 'location', property_owner_id: property_owner.id, dates_booked: '2018-04-15') }.to change { Properties.list.count }.by 1
+  end
 end
