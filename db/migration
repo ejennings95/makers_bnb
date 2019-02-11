@@ -1,0 +1,15 @@
+Database name: Makersbnb
+Test database name: Makersbnb_test
+
+#property_owner table
+
+CREATE TABLE property_owner(id SERIAL PRIMARY KEY, name VARCHAR(60));
+
+#properties table
+
+CREATE TABLE properties(id SERIAL PRIMARY KEY, name VARCHAR(60), description VARCHAR(6000), price INTEGER, location VARCHAR(500), property_owner_id INTEGER REFERENCES property_owner (id));
+
+
+format for location:
+
+street name, city, county, postcode, country
