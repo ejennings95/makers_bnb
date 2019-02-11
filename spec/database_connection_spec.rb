@@ -11,3 +11,11 @@ describe Database do
     expect(Database.connection).to eq connection
   end
 end
+
+describe 'query' do
+  it 'should exectue a query' do
+    connection = Database.setup('Makersbnb_test')
+    expect(connection).to receive(:exec).with("SELECT * FROM properties;")
+    Database.query("SELECT * FROM properties;")
+  end
+end
