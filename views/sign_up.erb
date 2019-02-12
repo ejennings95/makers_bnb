@@ -11,30 +11,30 @@
       <br>
       <h2>SIGN-UP</h2>
       <br>
-      <form action="" method="">
+      <form action="signup" method="post">
         <div class="form-group">
             <label for="exampleSelect1"><b>SELECT TYPE OF ACCOUNT:</b></label>
-            <select class="form-control" id="exampleSelect1">
+            <select class="form-control" name="account_type" id="exampleSelect1">
               <option>SIGN-UP TO RENT</option>
               <option>SIGN-UP TO ADVERTISE</option>
             </select>
           </div>
           <div class="form-group">
           <label><b>NAME:</b></label>
-          <input type="text" class="form-control" placeholder="Name">
+          <input type="text" name="name" class="form-control" placeholder="Name">
         </div>
         <div class="form-group">
           <label><b>USERNAME:</b></label>
-          <input type="text" class="form-control" placeholder="Username">
+          <input type="text" name="username" class="form-control" placeholder="Username">
         </div>
         <div class="form-group">
           <label><b>EMAIL ADDRESS:</b></label>
-          <input type="email" class="form-control" placeholder="Enter email">
+          <input type="email" name="email" class="form-control" placeholder="Enter email">
           <small class="form-text text-muted">We'll never share your email with anyone else.</small>
         </div>
         <div class="form-group">
           <label><b>PASSWORD:</b></label>
-          <input type="password" class="form-control" placeholder="Password">
+          <input type="password" name="password" class="form-control" placeholder="Password">
         </div>
         <div>
           <input type="submit" value="SUBMIT" class="btn btn-outline-primary btn-lg btn-block">

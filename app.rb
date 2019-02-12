@@ -4,11 +4,11 @@ require_relative './spec/test_database'
 require_relative './lib/database_setup'
 require_relative './lib/properties'
 require_relative './lib/property_owner'
+require_relative './lib/user'
 
 class Makersbnb < Sinatra::Base
     enable :sessions
     register Sinatra::Flash
-
 
     get ('/') do
       erb(:index)
@@ -41,6 +41,20 @@ class Makersbnb < Sinatra::Base
 
     get ('/myproperties') do
       @property_list = Properties.list
+    end
+
+    get ('/signup') do
+      erb(:sign_up)
+    end
+
+    post ('/signup') do
+      p params[:account_type]
+      if params[:account_type] = 'SIGN-UP TO ADVERTISE'
+        PropertyOwner.add(name: params[:name], username: params[:username], email: params[:email], password: params[:password])
+      else
+        User.add(name: params[:name], username: params[:username], email: params[:email], password: params[:password])
+      end
+      redirect '/browse'
     end
 
   run! if app_file == $0
