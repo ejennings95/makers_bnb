@@ -1,14 +1,17 @@
-Database name: Makersbnb
-Test database name: Makersbnb_test
+Database name: makersbnb
+Test database name: makersbnb_test
 
 #property_owner table
 
-CREATE TABLE property_owner(id SERIAL PRIMARY KEY, name VARCHAR(60));
+CREATE TABLE property_owner(id SERIAL PRIMARY KEY, name VARCHAR(60), username VARCHAR(60), email VARCHAR(200), password VARCHAR(200));
 
 #properties table
 
 CREATE TABLE properties(id SERIAL PRIMARY KEY, name VARCHAR(60), description VARCHAR(6000), price INTEGER, location VARCHAR(500), property_owner_id INTEGER REFERENCES property_owner (id), dates_booked DATE);
 
+#user table
+
+CREATE TABLE users(id SERIAL PRIMARY KEY, name VARCHAR(60), username VARCHAR(60), email VARCHAR(200), password VARCHAR(200));
 
 format for location:
 street name, city, county, postcode, country

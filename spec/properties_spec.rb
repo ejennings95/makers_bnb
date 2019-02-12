@@ -1,7 +1,7 @@
 require 'properties'
 
 describe Properties do
-  let(:property_owner) { double(PropertyOwner.add(name: 'name'), id: PropertyOwner.list.first.id) }
+  let(:property_owner) { double(PropertyOwner.add(name: 'owner1', username: 'propowner100', email: 'owner1@gmail.com', password: '123'), id: PropertyOwner.list.first.id) }
 
   it 'can be create a property and save its name' do
     property = Properties.add(name: 'name', description: 'description', price: 10, location: 'location', property_owner_id: property_owner.id, dates_booked: '2018-04-15')
