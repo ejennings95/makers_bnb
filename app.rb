@@ -20,12 +20,14 @@ class Makersbnb < Sinatra::Base
     end
 
     post'/view_property' do
-      @property_list = Properties.list.find { | property | property.id == session[:property_id] }
+      session[:property_id] = params[:property_id]
       redirect '/browse/:id'
     end
 
     get('/browse/:id') do
-      @property_list = Properties.list.find { |property | property.id == session[:property_id]}
+      @property = Properties.list.find { |property | property.id == session[:property_id]}
+      p "@property"
+      p @property
       erb(:property_details)
     end
 
