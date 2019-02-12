@@ -6,6 +6,7 @@ require_relative './lib/properties'
 require_relative './lib/property_owner'
 
 class Makersbnb < Sinatra::Base
+    enable :sessions
     register Sinatra::Flash
 
 
@@ -18,7 +19,15 @@ class Makersbnb < Sinatra::Base
       erb(:property_list)
     end
 
+    post'/view_property' do
+      session[:property_id] = params[:property_id]
+      redirect '/browse/:id'
+    end
+
     get('/browse/:id') do
+      @property = Properties.list.find { |property | property.id == session[:property_id]}
+      p "@property"
+      p @property
       erb(:property_details)
     end
 

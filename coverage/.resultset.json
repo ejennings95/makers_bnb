@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/elliotjennings/Desktop/makers/week-6/group-project/makers_bnb/app.rb": [
+      "/Users/jakeatkin/projects/group_projects/makersBNB/makers_bnb/app.rb": [
         1,
         1,
         1,
@@ -11,9 +11,15 @@
         null,
         1,
         1,
+        1,
         null,
         null,
         1,
+        0,
+        null,
+        null,
+        1,
+        0,
         0,
         null,
         null,
@@ -23,6 +29,10 @@
         null,
         null,
         1,
+        0,
+        0,
+        0,
+        0,
         0,
         null,
         null,
@@ -41,7 +51,7 @@
         1,
         null
       ],
-      "/Users/elliotjennings/Desktop/makers/week-6/group-project/makers_bnb/lib/database_setup.rb": [
+      "/Users/jakeatkin/projects/group_projects/makersBNB/makers_bnb/lib/database_setup.rb": [
         1,
         null,
         1,
@@ -50,7 +60,7 @@
         0,
         null
       ],
-      "/Users/elliotjennings/Desktop/makers/week-6/group-project/makers_bnb/lib/database_connection.rb": [
+      "/Users/jakeatkin/projects/group_projects/makersBNB/makers_bnb/lib/database_connection.rb": [
         1,
         null,
         1,
@@ -69,7 +79,7 @@
         null,
         null
       ],
-      "/Users/elliotjennings/Desktop/makers/week-6/group-project/makers_bnb/lib/properties.rb": [
+      "/Users/jakeatkin/projects/group_projects/makersBNB/makers_bnb/lib/properties.rb": [
         1,
         null,
         1,
@@ -96,7 +106,7 @@
         null,
         null
       ],
-      "/Users/elliotjennings/Desktop/makers/week-6/group-project/makers_bnb/lib/property_owner.rb": [
+      "/Users/jakeatkin/projects/group_projects/makersBNB/makers_bnb/lib/property_owner.rb": [
         1,
         1,
         null,
@@ -117,7 +127,7 @@
         null,
         null
       ],
-      "/Users/elliotjennings/Desktop/makers/week-6/group-project/makers_bnb/spec/database_connection_spec.rb": [
+      "/Users/jakeatkin/projects/group_projects/makersBNB/makers_bnb/spec/database_connection_spec.rb": [
         1,
         null,
         1,
@@ -140,7 +150,7 @@
         null,
         null
       ],
-      "/Users/elliotjennings/Desktop/makers/week-6/group-project/makers_bnb/spec/properties_spec.rb": [
+      "/Users/jakeatkin/projects/group_projects/makersBNB/makers_bnb/spec/properties_spec.rb": [
         1,
         null,
         1,
@@ -176,7 +186,7 @@
         null,
         null
       ],
-      "/Users/elliotjennings/Desktop/makers/week-6/group-project/makers_bnb/spec/property_owner_spec.rb": [
+      "/Users/jakeatkin/projects/group_projects/makersBNB/makers_bnb/spec/property_owner_spec.rb": [
         1,
         null,
         1,
@@ -192,6 +202,6 @@
         null
       ]
     },
-    "timestamp": 1549907299
+    "timestamp": 1549980913
   }
 }
