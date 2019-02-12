@@ -11,3 +11,10 @@ feature 'expects to show the property in more detail' do
     expect(page).to have_content ('Price')
   end
 end
+
+feature 'expect there to be request booking button' do
+  scenario do
+    visit '/browse'
+    expect(page).to have_button('REQUEST BOOKING')
+  end
+end
