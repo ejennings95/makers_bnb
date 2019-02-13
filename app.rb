@@ -15,6 +15,10 @@ class Makersbnb < Sinatra::Base
     end
 
     get ('/browse') do
+        @owner= PropertyOwner.list.find { | user | user.id == session[:user_id] }
+      if @owner == nil
+        @user = User.list.find { | user | user.id == session[:user_id] }
+      end
       @property_list = Properties.list
       erb(:property_list)
     end
@@ -25,6 +29,7 @@ class Makersbnb < Sinatra::Base
     end
 
     get('/browse/:id') do
+      @user_id = session[:user_id]
       @property = Properties.list.find { |property | property.id == session[:property_id]}
       p "@property"
       p @property
@@ -32,6 +37,7 @@ class Makersbnb < Sinatra::Base
     end
 
     get ('/browse/:id/confirmation') do
+      @user_id = session[:user_id]
       erb(:confirmation_pending)
     end
 
