@@ -18,3 +18,7 @@ street name, city, county, postcode, country
 
 format for date:
 yyyy-mm-dd
+
+#pending bookings table
+
+CREATE TABLE pending_bookings(id SERIAL PRIMARY KEY, user_id INTEGER REFERENCES users (id), property_id INTEGER REFERENCES properties (id), property_owner_id INTEGER REFERENCES property_owner (id), dates_booked DATE, about_me VARCHAR(500));
