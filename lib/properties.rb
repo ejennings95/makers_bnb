@@ -26,4 +26,8 @@ def self.list
   def self.add_booking_date(id:, dates_booked:)
     Database.query( "UPDATE properties SET dates_booked = '#{dates_booked}' WHERE id = '#{id}';")
   end
+
+  def self.remove(id:)
+    Database.query( "DELETE FROM properties WHERE id = '#{id}'" )
+  end
 end

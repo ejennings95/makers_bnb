@@ -31,4 +31,10 @@ describe Properties do
   it 'should be able to list all the properties' do
     expect { Properties.add(name: 'name', description: 'description', price: 10, location: 'location', property_owner_id: property_owner.id) }.to change { Properties.list.count }.by 1
   end
+
+  it 'should be able to remove a property' do
+    booking = Properties.add(name: 'name', description: 'description', price: 10, location: 'location', property_owner_id: property_owner.id)
+    Properties.remove(id: Properties.list.first.id)
+    expect(Properties.list.count).to eq 0
+  end
 end

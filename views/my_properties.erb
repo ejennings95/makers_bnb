@@ -35,7 +35,10 @@
         <div class="card-body"></div>
         <div class="card-footer text-muted">
           <div>
-            <button type="button" class="btn btn-outline-info btn-block">DELETE</button>
+            <form action="/deleteproperty" method="post">
+              <input type="hidden" name="property_id" value="<%= property.id %>" >
+              <input type="submit" value="DELETE" class="btn btn-outline-info btn-block">
+            </form>
           </div>
         </div>
         <% end %>

@@ -60,7 +60,7 @@ class Makersbnb < Sinatra::Base
     end
 
     post ('/pending_bookings') do
-      PendingBooking.add(user_id: params[:user_id], property_id: params[:property_id], property_owner_id: params[:prop_owner_id], dates_booked: params[:check_in], about_me: params[:about_me])
+      PendingBooking.add(user_id: params[:user_id], property_id: params[:property_id], property_owner_id: params[:property_owner_id], dates_booked: params[:check_in], about_me: params[:about_me])
       redirect '/browse/:id/confirmation'
     end
 
@@ -74,10 +74,15 @@ class Makersbnb < Sinatra::Base
     end
 
     get ('/myproperties') do
-        @user_id = session[:user_id]
-        @property_list = Properties.list
-        erb(:my_properties)
-      end
+      @user_id = session[:user_id]
+      @property_list = Properties.list
+      erb(:my_properties)
+    end
+
+    post ('/deleteproperty') do
+      Properties.remove(id: params[:property_id])
+      redirect '/myproperties'
+    end
 
     post ('/add_property') do
       Properties.add(name: params[:name], description: params[:description], location: params[:location], price: params[:price], property_owner_id: params[:prop_owner_id])
@@ -87,6 +92,8 @@ class Makersbnb < Sinatra::Base
     get ('/pendingapproval') do
       @pending_booking = PendingBooking.list
       @user_id = session[:user_id]
+      @users = User.list
+      @properties = Properties.list
       erb(:pending_approval)
     end
 

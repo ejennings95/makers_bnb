@@ -72,7 +72,6 @@
   <div class="col-md-5 mx-auto">
   <article class="">
     <div class="">
-
       <h3><%= @property.name %></h3>
       <%= @property.location %>
       <br>
@@ -91,6 +90,7 @@
   <br>
   </div>
   <br>
+    <% if @user_id != nil %>
   <div class="col-md-5 mx-auto card">
     <br>
     <form action="/pending_bookings" method="post">
@@ -126,6 +126,5 @@
   </form>
   </div>
   <% end %>
-
 </body>
 </html>
