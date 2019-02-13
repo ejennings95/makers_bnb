@@ -15,16 +15,6 @@ class Makersbnb < Sinatra::Base
       erb(:index)
     end
 
-    # post ('/userlogin') do
-    #   user = User.login(email: params[:user_email], password: params[:user_password])
-    #   if user
-    #     session[:user_id] = user.id
-    #     redirect '/browse'
-    #   else
-    #     flash[:notice] = "Invaild email or password given - try again."
-    #     redirect '/'
-    #   end
-    # end
     post ('/login') do
       if params[:log_in_account] == 'ADVERTISE ACCOUNT'
         user = PropertyOwner.login(email: params[:email], password: params[:password])
@@ -47,16 +37,6 @@ class Makersbnb < Sinatra::Base
         end
       end
     end
-    # post ('/ownerlogin') do
-    #   owner = PropertyOwner.login(email: params[:owner_email], password: params[:owner_password])
-    #   if owner
-    #     session[:user_id] = owner.id
-    #     redirect '/browse'
-    #   else
-    #     flash[:notice] = "Invaild email or password given - try again."
-    #     redirect '/'
-    #   end
-    # end
 
     get ('/browse') do
         @user= PropertyOwner.list.find { | user | user.id == session[:user_id] }
@@ -80,7 +60,6 @@ class Makersbnb < Sinatra::Base
     end
 
     post ('/pending_bookings') do
-      p params
       PendingBooking.add(user_id: params[:user_id], property_id: params[:property_id], property_owner_id: params[:property_owner_id], dates_booked: params[:check_in], about_me: params[:about_me])
       redirect '/browse/:id/confirmation'
     end
@@ -95,14 +74,30 @@ class Makersbnb < Sinatra::Base
     end
 
     get ('/myproperties') do
-      # @property_list = Properties.list
-      erb(:my_properties)
+        @user_id = session[:user_id]
+        @property_list = Properties.list
+        erb(:my_properties)
+      end
+
+    post ('/add_property') do
+      add_property = Properties.add(name: params[:name], description: params[:description], location: params[:location], price: params[:price], property_owner_id: params[:property_owner_id])
     end
 
     get ('/pendingapproval') do
       @pending_booking = PendingBooking.list
       @user_id = session[:user_id]
       erb(:pending_approval)
+    end
+
+    post ('/bookingapproved') do
+      Properties.add_booking_date(id: params[:property_id], dates_booked: params[:dates_booked])
+      PendingBooking.remove(id: params[:pending_booking_id])
+      redirect '/pendingapproval'
+    end
+
+    post ('/bookingdeclined') do
+      PendingBooking.remove(id: params[:pending_booking_id])
+      redirect '/pendingapproval'
     end
 
     get ('/signup') do
@@ -121,20 +116,6 @@ class Makersbnb < Sinatra::Base
       redirect '/browse'
     end
   end
-
-
-
-      # owner =  PropertyOwner.add(name: params[:name], username: params[:username], email: params[:email], password: params[:password])
-      # session[:user_id] = owner.id
-    #   user = User.add(name: params[:name], username: params[:username], email: params[:email], password: params[:password])
-    #   if user
-    #     session[:user_id] = user.id
-    #     redirect '/browse'
-    #   else
-    #     flash[:warning] = "Email already in use - please try another."
-    #     redirect '/signup'
-    #   end
-    # end
 
     post ('/logout') do
       session.clear
