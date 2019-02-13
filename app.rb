@@ -14,33 +14,7 @@ class Makersbnb < Sinatra::Base
       erb(:index)
     end
 
-    post ('/userlogin') do
-      user = User.login(email: params[:user_email], password: params[:user_password])
-        if user
-          session[:user_id] = user.id
-          redirect '/browse'
-        else
-          flash[:notice] = "Invaild email or password given - try again."
-          redirect '/'
-        end
-    end
-
-    post ('/ownerlogin') do
-      owner = PropertyOwner.login(email: params[:owner_email], password: params[:owner_password])
-        if owner
-          session[:user_id] = owner.id
-          redirect '/browse'
-        else
-          flash[:notice] = "Invaild email or password given - try again."
-          redirect '/'
-        end
-    end
-
     get ('/browse') do
-      @user = PropertyOwner.list.find { | user | user.id == session[:user_id] }
-      if @user == nil
-        @user = User.list.find { | user | user.id == session[:user_id] }
-      end
       @property_list = Properties.list
       erb(:property_list)
     end
@@ -52,6 +26,8 @@ class Makersbnb < Sinatra::Base
 
     get('/browse/:id') do
       @property = Properties.list.find { |property | property.id == session[:property_id]}
+      p "@property"
+      p @property
       erb(:property_details)
     end
 
@@ -72,21 +48,13 @@ class Makersbnb < Sinatra::Base
     end
 
     post ('/signup') do
-      # owner =  PropertyOwner.add(name: params[:name], username: params[:username], email: params[:email], password: params[:password])
-      # session[:user_id] = owner.id
-      user = User.add(name: params[:name], username: params[:username], email: params[:email], password: params[:password])
-      if user
-      session[:user_id] = user.id
+      p params[:account_type]
+      if params[:account_type] = 'SIGN-UP TO ADVERTISE'
+        PropertyOwner.add(name: params[:name], username: params[:username], email: params[:email], password: params[:password])
+      else
+        User.add(name: params[:name], username: params[:username], email: params[:email], password: params[:password])
+      end
       redirect '/browse'
-    else
-      flash[:warning] = "Email already in use - please try another."
-      redirect '/signup'
-    end
-    end
-
-    post ('/logout') do
-      session.clear
-      redirect ('/')
     end
 
   run! if app_file == $0
