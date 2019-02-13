@@ -74,17 +74,30 @@ class Makersbnb < Sinatra::Base
     end
 
     post ('/signup') do
+
+    if params[:account_type] == 'SIGN-UP TO ADVERTISE'
+      owner =  PropertyOwner.add(name: params[:name], username: params[:username], email: params[:email], password: params[:password])
+      session[:user_id] = owner.id
+    else
+      params[:account_type] == 'SIGN-UP TO RENT'
+      user = User.add(name: params[:name], username: params[:username], email: params[:email], password: params[:password])
+      session[:user_id] = user.id
+    end
+  end
+
+
+
       # owner =  PropertyOwner.add(name: params[:name], username: params[:username], email: params[:email], password: params[:password])
       # session[:user_id] = owner.id
-      user = User.add(name: params[:name], username: params[:username], email: params[:email], password: params[:password])
-      if user
-        session[:user_id] = user.id
-        redirect '/browse'
-      else
-        flash[:warning] = "Email already in use - please try another."
-        redirect '/signup'
-      end
-    end
+    #   user = User.add(name: params[:name], username: params[:username], email: params[:email], password: params[:password])
+    #   if user
+    #     session[:user_id] = user.id
+    #     redirect '/browse'
+    #   else
+    #     flash[:warning] = "Email already in use - please try another."
+    #     redirect '/signup'
+    #   end
+    # end
 
     post ('/logout') do
       session.clear
