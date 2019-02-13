@@ -5,6 +5,7 @@ require_relative './lib/database_setup'
 require_relative './lib/properties'
 require_relative './lib/property_owner'
 require_relative './lib/user'
+require_relative './lib/pending_booking'
 
 class Makersbnb < Sinatra::Base
     enable :sessions
@@ -76,6 +77,12 @@ class Makersbnb < Sinatra::Base
       @user_id = session[:user_id]
       @property = Properties.list.find { |property | property.id == session[:property_id]}
       erb(:property_details)
+    end
+
+    post ('/pending_bookings') do
+      p params
+      PendingBooking.add(user_id: params[:user_id], property_id: params[:property_id], property_owner_id: params[:property_owner_id], dates_booked: params[:check_in], about_me: params[:about_me])
+      redirect '/browse/:id/confirmation'
     end
 
     get ('/browse/:id/confirmation') do

@@ -92,7 +92,10 @@
   <br>
   <div class="col-md-5 mx-auto card">
     <br>
-    <form action="/browse/:id/confirmation">
+    <form action="/pending_bookings" method="post">
+      <input type="hidden" name="user_id" value="<%= @user_id %>">
+      <input type="hidden" name="property_id" value="<%= @property.id %>">
+      <input type="hidden" name="property_owner_id" value="<%= @property.property_owner_id %>">
       <p><b>PLEASE COMPLETE IN ORDER TO REQUEST A BOOKING</b></p>
       <!-- <form action="/action_page.php"> -->
         CHECK IN:
@@ -105,7 +108,7 @@
       <!-- </form> -->
       <div class="form-group">
         <br>
-        <textarea class="form-control" rows="3" placeholder="Write a couple of sentances about yourself for the owner"></textarea>
+        <textarea class="form-control" name="about_me" rows="3" placeholder="Write a couple of sentances about yourself for the owner"></textarea>
       </div>
       <br>
 
