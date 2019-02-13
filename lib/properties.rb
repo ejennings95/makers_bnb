@@ -22,4 +22,10 @@ def self.list
     Properties.new(id: row['id'], name: row['name'], description: row['description'], price: row['price'], location: row['location'], property_owner_id: row['property_owner_id'], dates_booked: row['dates_booked'])
     end
   end
+
+# def self.ownerlist(property_owner_id:)
+#   Database.query ("SELECT * FROM properties WHERE property_owner_id = #{property_owner_id}").map do | row |
+#     Properties.new(id: row['id'], name: row['name'], description: row['description'], price: row['price'], location: row['location'], property_owner_id: row['property_owner_id'], dates_booked: row['dates_booked'])
+#     end
+#   end
 end

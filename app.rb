@@ -14,16 +14,6 @@ class Makersbnb < Sinatra::Base
       erb(:index)
     end
 
-    # post ('/userlogin') do
-    #   user = User.login(email: params[:user_email], password: params[:user_password])
-    #   if user
-    #     session[:user_id] = user.id
-    #     redirect '/browse'
-    #   else
-    #     flash[:notice] = "Invaild email or password given - try again."
-    #     redirect '/'
-    #   end
-    # end
     post ('/login') do
       if params[:log_in_account] == 'ADVERTISE ACCOUNT'
         user = PropertyOwner.login(email: params[:email], password: params[:password])
@@ -46,16 +36,6 @@ class Makersbnb < Sinatra::Base
         end
       end
     end
-    # post ('/ownerlogin') do
-    #   owner = PropertyOwner.login(email: params[:owner_email], password: params[:owner_password])
-    #   if owner
-    #     session[:user_id] = owner.id
-    #     redirect '/browse'
-    #   else
-    #     flash[:notice] = "Invaild email or password given - try again."
-    #     redirect '/'
-    #   end
-    # end
 
     get ('/browse') do
         @user= PropertyOwner.list.find { | user | user.id == session[:user_id] }
@@ -88,7 +68,8 @@ class Makersbnb < Sinatra::Base
     end
 
     get ('/myproperties') do
-      # @property_list = Properties.list
+      @user_id = session[:user_id]
+      @property_list = Properties.list
       erb(:my_properties)
     end
 
