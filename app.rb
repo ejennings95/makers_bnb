@@ -99,6 +99,12 @@ class Makersbnb < Sinatra::Base
       erb(:my_properties)
     end
 
+    get ('/pendingapproval') do
+      @pending_booking = PendingBooking.list
+      @user_id = session[:user_id]
+      erb(:pending_approval)
+    end
+
     get ('/signup') do
       erb(:sign_up)
     end
