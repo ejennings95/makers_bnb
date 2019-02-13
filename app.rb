@@ -60,7 +60,7 @@ class Makersbnb < Sinatra::Base
     end
 
     post ('/pending_bookings') do
-      PendingBooking.add(user_id: params[:user_id], property_id: params[:property_id], property_owner_id: params[:property_owner_id], dates_booked: params[:check_in], about_me: params[:about_me])
+      PendingBooking.add(user_id: params[:user_id], property_id: params[:property_id], property_owner_id: params[:prop_owner_id], dates_booked: params[:check_in], about_me: params[:about_me])
       redirect '/browse/:id/confirmation'
     end
 
@@ -80,7 +80,8 @@ class Makersbnb < Sinatra::Base
       end
 
     post ('/add_property') do
-      add_property = Properties.add(name: params[:name], description: params[:description], location: params[:location], price: params[:price], property_owner_id: params[:property_owner_id])
+      Properties.add(name: params[:name], description: params[:description], location: params[:location], price: params[:price], property_owner_id: params[:prop_owner_id])
+      redirect ('/myproperties')
     end
 
     get ('/pendingapproval') do
@@ -98,10 +99,6 @@ class Makersbnb < Sinatra::Base
     post ('/bookingdeclined') do
       PendingBooking.remove(id: params[:pending_booking_id])
       redirect '/pendingapproval'
-    end
-
-    post ('/add_property') do
-      add_property = Properties.add(name: params[:name], description: params[:description], location: params[:location], price: params[:price], property_owner_id: params[:property_owner_id])
     end
 
     get ('/signup') do
