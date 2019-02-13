@@ -18,7 +18,7 @@
           <form class="form-inline my-2 my-lg-0">
             <button class="btn btn-secondary my-2 my-sm-0" type="submit">MY PROPERTIES</button>
           </form>
-          <% if @user != nil %>
+          <% if @user_id != nil %>
           <form action="/logout" method="post">
             <input type="submit" value="Logout" class="button">
           </form>
@@ -26,7 +26,7 @@
         </div>
     </nav>
      <br>
-     <% if @user != nil %>
+     <% if @user_id != nil %>
      Welcome back <%= @user.name %>
      <% end %>
     <div class="col-md-4 mx-auto">

@@ -14,34 +14,56 @@ class Makersbnb < Sinatra::Base
       erb(:index)
     end
 
-    post ('/userlogin') do
-      user = User.login(email: params[:user_email], password: params[:user_password])
-      if user
-        session[:user_id] = user.id
-        redirect '/browse'
-      else
-        flash[:notice] = "Invaild email or password given - try again."
-        redirect '/'
+    # post ('/userlogin') do
+    #   user = User.login(email: params[:user_email], password: params[:user_password])
+    #   if user
+    #     session[:user_id] = user.id
+    #     redirect '/browse'
+    #   else
+    #     flash[:notice] = "Invaild email or password given - try again."
+    #     redirect '/'
+    #   end
+    # end
+    post ('/login') do
+      if params[:log_in_account] == 'ADVERTISE ACCOUNT'
+        user = PropertyOwner.login(email: params[:email], password: params[:password])
+        if user
+          session[:user_id] = user.id
+          redirect '/myproperties'
+        else
+          flash[:notice] = "Invaild email or password given - try again."
+          redirect '/'
+        end
+      end
+        if params[:log_in_account] == 'RENT ACCOUNT'
+        user = User.login(email: params[:email], password: params[:password])
+        if user
+          session[:user_id] = user.id
+          redirect '/browse'
+        else
+          flash[:notice] = "Invaild email or password given - try again."
+          redirect '/'
+        end
       end
     end
-
-    post ('/ownerlogin') do
-      owner = PropertyOwner.login(email: params[:owner_email], password: params[:owner_password])
-      if owner
-        session[:user_id] = owner.id
-        redirect '/browse'
-      else
-        flash[:notice] = "Invaild email or password given - try again."
-        redirect '/'
-      end
-    end
+    # post ('/ownerlogin') do
+    #   owner = PropertyOwner.login(email: params[:owner_email], password: params[:owner_password])
+    #   if owner
+    #     session[:user_id] = owner.id
+    #     redirect '/browse'
+    #   else
+    #     flash[:notice] = "Invaild email or password given - try again."
+    #     redirect '/'
+    #   end
+    # end
 
     get ('/browse') do
-        @owner= PropertyOwner.list.find { | user | user.id == session[:user_id] }
-      if @owner == nil
+        @user= PropertyOwner.list.find { | user | user.id == session[:user_id] }
+      if @user == nil
         @user = User.list.find { | user | user.id == session[:user_id] }
       end
       @property_list = Properties.list
+      @user_id = session[:user_id]
       erb(:property_list)
     end
 
@@ -75,10 +97,9 @@ class Makersbnb < Sinatra::Base
     end
 
     post ('/signup') do
-
     if params[:account_type] == 'SIGN-UP TO ADVERTISE'
-      owner =  PropertyOwner.add(name: params[:name], username: params[:username], email: params[:email], password: params[:password])
-      session[:user_id] = owner.id
+      user =  PropertyOwner.add(name: params[:name], username: params[:username], email: params[:email], password: params[:password])
+      session[:user_id] = user.id
       redirect '/myproperties'
     else
       params[:account_type] == 'SIGN-UP TO RENT'
