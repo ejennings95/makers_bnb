@@ -66,7 +66,8 @@ class Makersbnb < Sinatra::Base
     end
 
     get ('/myproperties') do
-      @property_list = Properties.list
+      # @property_list = Properties.list
+      erb(:my_properties)
     end
 
     get ('/signup') do
@@ -78,10 +79,12 @@ class Makersbnb < Sinatra::Base
     if params[:account_type] == 'SIGN-UP TO ADVERTISE'
       owner =  PropertyOwner.add(name: params[:name], username: params[:username], email: params[:email], password: params[:password])
       session[:user_id] = owner.id
+      redirect '/myproperties'
     else
       params[:account_type] == 'SIGN-UP TO RENT'
       user = User.add(name: params[:name], username: params[:username], email: params[:email], password: params[:password])
       session[:user_id] = user.id
+      redirect '/browse'
     end
   end
 
