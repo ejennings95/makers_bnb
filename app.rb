@@ -73,6 +73,10 @@ class Makersbnb < Sinatra::Base
       erb(:my_properties)
     end
 
+    post ('/add_property') do
+      add_property = Properties.add(name: params[:name], description: params[:description], location: params[:location], price: params[:price], property_owner_id: params[:property_owner_id])
+    end
+
     get ('/signup') do
       erb(:sign_up)
     end
