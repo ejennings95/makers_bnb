@@ -13,4 +13,10 @@ describe PendingBooking do
   it 'should be able to list all the pending bookings' do
     expect {PendingBooking.add(user_id: user.id, property_id: property.id, property_owner_id: property_owner.id, dates_booked: '2018-03-19', about_me: 'About me')}.to change { PendingBooking.list.count }.by 1
   end
+
+  it 'should be able to remove a pending booking' do
+    booking = PendingBooking.add(user_id: user.id, property_id: property.id, property_owner_id: property_owner.id, dates_booked: '2018-03-19', about_me: 'About me')
+    PendingBooking.remove(id: PendingBooking.list.first.id)
+    expect(PendingBooking.list.count).to eq 0
+  end
 end
