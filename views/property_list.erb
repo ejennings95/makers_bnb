@@ -10,20 +10,40 @@
       <span class="navbar-toggler-icon"></span>
       </button>
         <div class="collapse navbar-collapse" id="navbarColor01">
-          <ul class="navbar-nav mr-auto">
+          <!-- <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="http://localhost:9292/">Home <span class="sr-only">(current)</span></a>
+              <a class="nav-link text-primary"> <span class="sr-only">(current)</span></a>
             </li>
-          </ul>
-
-          <% if @owner == 'ADVERTISE ACCOUNT' %>
-          <form class="form-inline my-2 my-lg-0">
-            <button class="btn btn-secondary my-2 my-sm-0" type="submit">MY PROPERTIES</button>
+          </ul> -->
+          <% if @user_id == nil %>
+          <form action="/signup" class="form-inline my-2 my-lg-0">
+            <input class="btn btn-outline-info my-2 my-sm-0" type="submit" value="SIGN-UP">
           </form>
           <% end %>
 
 
           <% if @user_id != nil %>
+
+            <% if @owner == 'ADVERTISE ACCOUNT' %>
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+
+                <a class="nav-link text-white" href="http://localhost:9292/myproperties">MY PROPERTIES<span class="sr-only">(current)</span></a>
+
+              </li>
+            </ul>
+            <!-- <form action="/myproperties" class="form-inline my-2 my-lg-0">
+              <button class="btn btn-secondary my-2 my-sm-0" type="submit">MY PROPERTIES</button>
+            </form> -->
+            <% else %>
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+
+                <a class="nav-link text-white" href="http://localhost:9292/mybookings">MY BOOKINGS<span class="sr-only">(current)</span></a>
+
+              </li>
+            </ul>
+            <% end %>
           <form action="/logout" method="post">
             <input type="submit" value="Logout" class="button">
           </form>

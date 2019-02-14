@@ -18,7 +18,8 @@ class Makersbnb < Sinatra::Base
     end
 
     post ('/login') do
-      @owner = params[:log_in_account]
+      session[:owner] = params[:log_in_account]
+      @owner = session[:owner]
       if params[:log_in_account] == 'ADVERTISE ACCOUNT'
         user = PropertyOwner.login(email: params[:email], password: params[:password])
         if user
@@ -42,6 +43,7 @@ class Makersbnb < Sinatra::Base
     end
 
     get ('/browse') do
+      @owner = session[:owner]
         @user= PropertyOwner.list.find { | user | user.id == session[:user_id] }
       if @user == nil
         @user = User.list.find { | user | user.id == session[:user_id] }
@@ -57,6 +59,7 @@ class Makersbnb < Sinatra::Base
     end
 
     get('/browse/:id') do
+      @owner = session[:owner]
       @user_id = session[:user_id]
       @property = Properties.list.find { |property | property.id == session[:property_id]}
       @bookings = Booking.list
@@ -85,6 +88,7 @@ class Makersbnb < Sinatra::Base
     end
 
     get ('/mybookings') do
+      @owner = session[:owner]
       @user_id = session[:user_id]
       @properties = Properties.list
       @property_owner = PropertyOwner.list
