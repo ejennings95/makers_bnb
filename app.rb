@@ -6,6 +6,7 @@ require_relative './lib/properties'
 require_relative './lib/property_owner'
 require_relative './lib/user'
 require_relative './lib/pending_booking'
+require_relative './lib/booking'
 
 class Makersbnb < Sinatra::Base
     enable :sessions
@@ -60,7 +61,7 @@ class Makersbnb < Sinatra::Base
     end
 
     post ('/pending_bookings') do
-      PendingBooking.add(user_id: params[:user_id], property_id: params[:property_id], property_owner_id: params[:property_owner_id], dates_booked: params[:check_in], about_me: params[:about_me])
+      PendingBooking.add(user_id: params[:user_id], property_id: params[:property_id], property_owner_id: params[:property_owner_id], start_date: params[:check_in], end_date: params[:check_out], about_me: params[:about_me])
       redirect '/browse/:id/confirmation'
     end
 
@@ -98,7 +99,7 @@ class Makersbnb < Sinatra::Base
     end
 
     post ('/bookingapproved') do
-      Properties.add_booking_date(id: params[:property_id], dates_booked: params[:dates_booked])
+      Booking.add(user_id: params[:user_id], property_id: params[:property_id], property_owner_id: params[:property_owner_id], start_date: params[:check_in], end_date: params[:check_out], about_me: params[:about_me])
       PendingBooking.remove(id: params[:pending_booking_id])
       redirect '/pendingapproval'
     end
