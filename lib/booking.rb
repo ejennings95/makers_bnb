@@ -26,4 +26,8 @@ class Booking
   def self.remove(id:)
     Database.query( "DELETE FROM bookings WHERE id = '#{id}'" )
   end
+
+#   def self.booked?(property_id:, start_date:, end_date:)
+#     Database.query( "SELECT property_id FROM bookings WHERE ('2019-06-25', '2019-06-28') OVERLAPS ('#{start_date}', '#{end_date}') RETURNING property_id;" )
+# end
 end
