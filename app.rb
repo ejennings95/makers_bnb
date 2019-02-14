@@ -16,6 +16,7 @@ class Makersbnb < Sinatra::Base
     end
 
     post ('/login') do
+      @owner = params[:log_in_account]
       if params[:log_in_account] == 'ADVERTISE ACCOUNT'
         user = PropertyOwner.login(email: params[:email], password: params[:password])
         if user
