@@ -83,6 +83,14 @@ class Makersbnb < Sinatra::Base
       erb(:confirmation_pending)
     end
 
+    get ('/mybookings') do
+      @user_id = session[:user_id]
+      @properties = Properties.list
+      @property_owner = PropertyOwner.list
+      @bookings = Booking.list
+      erb(:mybookings)
+    end
+
     get ('/ownerlogin') do
       erb(:log_in)
     end
