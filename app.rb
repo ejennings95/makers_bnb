@@ -127,6 +127,9 @@ class Makersbnb < Sinatra::Base
       redirect '/pendingapproval'
     end
 
+    post('/sendemail') do
+    end
+    
     post ('/bookingdeclined') do
       PendingBooking.remove(id: params[:pending_booking_id])
       redirect '/pendingapproval'

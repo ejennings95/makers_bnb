@@ -49,6 +49,7 @@
         <div class="card-footer text-muted">
           <div>
             <form action="/bookingapproved" method="post">
+            <input type="hidden" name="send_email" value="SendGridApi"
             <input type="hidden" name="pending_booking_id" value="<%= pending_booking.id %>">
             <input type="hidden" name="property_owner_id" value="<%= pending_booking.property_owner_id %>">
             <input type="hidden" name="user_id" value="<%= pending_booking.user_id %>">

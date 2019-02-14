@@ -1,6 +1,10 @@
 ENV['RACK_ENV'] = 'test'
 ENV['ENVIRONMENT'] = 'test'
 
+# echo "export SENDGRID_API_KEY=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'" > sendgrid.env
+# echo "sendgrid.env" >> .gitignore
+# source ./sendgrid.env
+
 require 'capybara'
 require 'capybara/rspec'
 require 'rack/test'
@@ -9,6 +13,7 @@ require 'simplecov'
 require 'simplecov-console'
 require 'rubocop'
 require_relative './test_database'
+
 
 
 SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
