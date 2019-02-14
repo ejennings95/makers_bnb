@@ -68,5 +68,41 @@
       <% end %>
       <% end %>
     </div>
+
+BOOKINGS
+
+    <div class="col-md-4 mx-auto">
+      <% @bookings.each do |booking| %>
+      <% if booking.property_owner_id == @user_id %>
+      <div class="card mb-3">
+        <% @properties.each do |property| %>
+        <% if booking.property_id == property.id %>
+        <h3 class="card-header"> <%= property.name %></h3>
+        <% end %>
+        <% end %>
+        <div class="card-body">
+          <h5 class="card-title"></h5>
+          <% @users.each do |user| %>
+          <% if booking.user_id == user.id %>
+          <p>Booker's name: <%= user.name %></p>
+          <p>About the booker: <%= booking.about_me %> </p
+          <p>Start date: <%= booking.start_date %> </p>
+          <p>End date: <%= booking.end_date %> </p>
+
+          <!-- <p>END DATE :</p> -->
+        </div>
+        <img style="height: 200px; width: 100%; display: block;" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22318%22%20height%3D%22180%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20318%20180%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_158bd1d28ef%20text%20%7B%20fill%3Argba(255%2C255%2C255%2C.75)%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A16pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_158bd1d28ef%22%3E%3Crect%20width%3D%22318%22%20height%3D%22180%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22129.359375%22%20y%3D%2297.35%22%3EImage%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" alt="Card image">
+        <div class="card-body"></div>
+        <div class="card-footer text-muted">
+          Contact booker: <%= user.email %>
+        </div>
+      </div>
+      <% end %>
+      <% end %>
+      <% end %>
+      <% end %>
+    </div>
+
+
   </body>
 </html>

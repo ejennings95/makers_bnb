@@ -108,6 +108,7 @@ class Makersbnb < Sinatra::Base
       @user_id = session[:user_id]
       @users = User.list
       @properties = Properties.list
+      @bookings = Booking.list
       erb(:pending_approval)
     end
 
