@@ -6,6 +6,8 @@ require_relative './lib/properties'
 require_relative './lib/property_owner'
 require_relative './lib/user'
 require_relative './lib/pending_booking'
+require_relative './lib/booking'
+require 'date'
 
 class Makersbnb < Sinatra::Base
     enable :sessions
@@ -57,17 +59,37 @@ class Makersbnb < Sinatra::Base
     get('/browse/:id') do
       @user_id = session[:user_id]
       @property = Properties.list.find { |property | property.id == session[:property_id]}
+      @bookings = Booking.list
       erb(:property_details)
     end
 
     post ('/pending_bookings') do
-      PendingBooking.add(user_id: params[:user_id], property_id: params[:property_id], property_owner_id: params[:property_owner_id], dates_booked: params[:check_in], about_me: params[:about_me])
-      redirect '/browse/:id/confirmation'
+      @bookings = Booking.list
+      @bookings.each do | booking |
+        if booking.property_id == params[:property_id]
+        conflict = ( Date.parse(booking.start_date) <= Date.parse(params[:check_out]) && (Date.parse(params[:check_in]) <= (Date.parse(booking.end_date))) )
+          if conflict == true
+            flash[:notice] = "Dates already booked - try another date."
+            redirect '/browse/:id'
+          else
+            PendingBooking.add(user_id: params[:user_id], property_id: params[:property_id], property_owner_id: params[:property_owner_id], start_date: params[:check_in], end_date: params[:check_out], about_me: params[:about_me])
+            redirect '/browse/:id/confirmation'
+          end
+        end
+      end
     end
 
     get ('/browse/:id/confirmation') do
       @user_id = session[:user_id]
       erb(:confirmation_pending)
+    end
+
+    get ('/mybookings') do
+      @user_id = session[:user_id]
+      @properties = Properties.list
+      @property_owner = PropertyOwner.list
+      @bookings = Booking.list
+      erb(:mybookings)
     end
 
     get ('/ownerlogin') do
@@ -95,11 +117,12 @@ class Makersbnb < Sinatra::Base
       @user_id = session[:user_id]
       @users = User.list
       @properties = Properties.list
+      @bookings = Booking.list
       erb(:pending_approval)
     end
 
     post ('/bookingapproved') do
-      Properties.add_booking_date(id: params[:property_id], dates_booked: params[:dates_booked])
+      Booking.add(user_id: params[:user_id], property_id: params[:property_id], property_owner_id: params[:property_owner_id], start_date: params[:check_in], end_date: params[:check_out], about_me: params[:about_me])
       PendingBooking.remove(id: params[:pending_booking_id])
       redirect '/pendingapproval'
     end
