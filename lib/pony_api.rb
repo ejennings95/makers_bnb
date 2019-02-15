@@ -3,9 +3,9 @@ require 'pony'
 class Mailer
 
 
-  def sendemail
+  def sendemail(email)
     Pony.mail({
-      :to => 'elliot.r.jennings@outlook.com',
+      :to => email,
       :via => :smtp,
       :via_options => {
         :address        => 'smtp.gmail.com',
