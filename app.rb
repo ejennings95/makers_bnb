@@ -7,6 +7,7 @@ require_relative './lib/property_owner'
 require_relative './lib/user'
 require_relative './lib/pending_booking'
 require_relative './lib/booking'
+require_relative 'SendGrid_api'
 require 'date'
 
 class Makersbnb < Sinatra::Base
@@ -124,12 +125,13 @@ class Makersbnb < Sinatra::Base
     post ('/bookingapproved') do
       Booking.add(user_id: params[:user_id], property_id: params[:property_id], property_owner_id: params[:property_owner_id], start_date: params[:check_in], end_date: params[:check_out], about_me: params[:about_me])
       PendingBooking.remove(id: params[:pending_booking_id])
+      booking_confirmation = BookingConfirmation.new
       redirect '/pendingapproval'
     end
 
     post('/sendemail') do
     end
-    
+
     post ('/bookingdeclined') do
       PendingBooking.remove(id: params[:pending_booking_id])
       redirect '/pendingapproval'
