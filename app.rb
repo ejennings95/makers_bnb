@@ -61,6 +61,9 @@ class Makersbnb < Sinatra::Base
     end
 
     get('/browse/:id') do
+      @picture_one = "http://i68.tinypic.com/2cfxngm.jpg"
+      @picture_two = "http://i67.tinypic.com/1zzrmev.jpg"
+      @picture_three = "http://i68.tinypic.com/2cfxngm.jpg"
       @account_type = session[:account_type]
       @user_id = session[:user_id]
       @property = Properties.list.find { |property | property.id == session[:property_id]}
