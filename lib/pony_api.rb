@@ -2,8 +2,7 @@ require 'pony'
 
 class Mailer
 
-
-  def sendemail(email)
+  def emailsender(email)
     Pony.mail({
       :to => email,
       :via => :smtp,

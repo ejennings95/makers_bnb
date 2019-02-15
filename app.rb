@@ -7,7 +7,8 @@ require_relative './lib/property_owner'
 require_relative './lib/user'
 require_relative './lib/pending_booking'
 require_relative './lib/booking'
-require_relative '/Users/jakeatkin/projects/group_projects/makersBNB/makers_bnb/lib/pony_api.rb'
+require_relative './lib/pony_api'
+require 'pony'
 require 'date'
 
 class Makersbnb < Sinatra::Base
@@ -152,12 +153,13 @@ end
 
     post ('/bookingapproved') do
       Booking.add(user_id: params[:user_id], property_id: params[:property_id], property_owner_id: params[:property_owner_id], start_date: params[:check_in], end_date: params[:check_out], about_me: params[:about_me])
-      PendingBooking.remove(id: params[:pending_booking_id])
       @users = User.list
       @users.each do |user|
         if user.id == params[:user_id]
-          Mailer.sendemail(user.email)
+          email = Mailer.new
+          email.emailsender(user.email)
         end
+        PendingBooking.remove(id: params[:pending_booking_id])
       end
       redirect '/pendingapproval'
     end
