@@ -13,3 +13,5 @@ gem 'simplecov'
 gem 'simplecov-console'
 gem 'sinatra'
 gem "sinatra-flash"
+gem 'sendgrid-ruby'
+gem 'pony'

@@ -7,6 +7,7 @@ require_relative './lib/property_owner'
 require_relative './lib/user'
 require_relative './lib/pending_booking'
 require_relative './lib/booking'
+require_relative '/Users/jakeatkin/projects/group_projects/makersBNB/makers_bnb/lib/pony_api.rb'
 require 'date'
 
 class Makersbnb < Sinatra::Base
@@ -72,7 +73,7 @@ class Makersbnb < Sinatra::Base
         if booking.property_id == params[:property_id]
         conflict = ( Date.parse(booking.start_date) <= Date.parse(params[:check_out]) && (Date.parse(params[:check_in]) <= (Date.parse(booking.end_date))) )
           if conflict == true
-            flash[:notice] = "Dates already booked - try another date."
+            # flash[:notice] = "Dates already booked - try another date."
             redirect '/browse/:id'
           else
             PendingBooking.add(user_id: params[:user_id], property_id: params[:property_id], property_owner_id: params[:property_owner_id], start_date: params[:check_in], end_date: params[:check_out], about_me: params[:about_me])
@@ -152,7 +153,16 @@ end
     post ('/bookingapproved') do
       Booking.add(user_id: params[:user_id], property_id: params[:property_id], property_owner_id: params[:property_owner_id], start_date: params[:check_in], end_date: params[:check_out], about_me: params[:about_me])
       PendingBooking.remove(id: params[:pending_booking_id])
+      @users = User.list
+      @users.each do |user|
+        if user.id == params[:user_id]
+          Mailer.sendemail(user.email)
+        end
+      end
       redirect '/pendingapproval'
+    end
+
+    post('/sendemail') do
     end
 
     post ('/bookingdeclined') do
