@@ -13,14 +13,14 @@ def initialize(id:, name:, description:, price:, location:, property_owner_id:, 
 end
 
 def self.add(name:, description:, price:, location:, property_owner_id:, images:)
-  result = Database.query( "INSERT INTO properties(name, description, price, location, property_owner_id) VALUES('#{name}','#{description}', #{price}, '#{location}', #{property_owner_id}, #{'images'}) RETURNING name, description, price, location, property_owner_id, images;")
+  result = Database.query( "INSERT INTO properties(name, description, price, location, property_owner_id, images) VALUES('#{name}','#{description}', #{price}, '#{location}', #{property_owner_id}, '#{images}') RETURNING name, description, price, location, property_owner_id, images;")
   Properties.new(id: result[0]['id'], name: result[0]['name'], description: result[0]['description'], price: result[0]['price'], location: result[0]['location'], property_owner_id: result[0]['property_owner_id'], images: result[0]['images'])
 end
 
 def self.list
   Database.query( "SELECT * FROM properties" ).map do | row |
     Properties.new(id: row['id'], name: row['name'], description: row['description'], price: row['price'], location: row['location'], property_owner_id: row['property_owner_id'], images: row['images'])
-    end 
+    end
   end
   #
   # def self.add_booking_date(id:, dates_booked:)
