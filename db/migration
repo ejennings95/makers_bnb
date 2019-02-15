@@ -21,8 +21,8 @@ yyyy-mm-dd
 
 #pending bookings table
 
-CREATE TABLE pending_bookings(id SERIAL PRIMARY KEY, user_id INTEGER REFERENCES users (id), property_id INTEGER REFERENCES properties (id), property_owner_id INTEGER REFERENCES property_owner (id), start_date DATE, end_date DATE, about_me VARCHAR(500));
+CREATE TABLE pending_bookings(id SERIAL PRIMARY KEY, user_id INTEGER REFERENCES users (id), property_id INTEGER REFERENCES properties (id), property_owner_id INTEGER REFERENCES property_owner (id), start_date DATE, end_date DATE, about_me VARCHAR(500), images VARCHAR(200));
 
 #bookings
 
-CREATE TABLE bookings(id SERIAL PRIMARY KEY, user_id INTEGER REFERENCES users (id), property_id INTEGER REFERENCES properties (id), property_owner_id INTEGER REFERENCES property_owner (id), start_date DATE, end_date DATE, about_me VARCHAR(500));
+CREATE TABLE bookings(id SERIAL PRIMARY KEY, user_id INTEGER REFERENCES users (id), property_id INTEGER REFERENCES properties (id), property_owner_id INTEGER REFERENCES property_owner (id), start_date DATE, end_date DATE, about_me VARCHAR(500), images VARCHAR(200));

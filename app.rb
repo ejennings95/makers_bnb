@@ -82,7 +82,7 @@ class Makersbnb < Sinatra::Base
             flash[:notice] = "Dates already booked - try another date."
             redirect '/browse/:id'
           else
-            PendingBooking.add(user_id: params[:user_id], property_id: params[:property_id], property_owner_id: params[:property_owner_id], start_date: params[:check_in], end_date: params[:check_out], about_me: params[:about_me])
+            PendingBooking.add(user_id: params[:user_id], property_id: params[:property_id], property_owner_id: params[:property_owner_id], start_date: params[:check_in], end_date: params[:check_out], about_me: params[:about_me], images: params[:images])
             redirect '/browse/:id/confirmation'
           end
         end
@@ -157,7 +157,7 @@ end
     end
 
     post ('/bookingapproved') do
-      Booking.add(user_id: params[:user_id], property_id: params[:property_id], property_owner_id: params[:property_owner_id], start_date: params[:check_in], end_date: params[:check_out], about_me: params[:about_me])
+      Booking.add(user_id: params[:user_id], property_id: params[:property_id], property_owner_id: params[:property_owner_id], start_date: params[:check_in], end_date: params[:check_out], about_me: params[:about_me], images: params[:images])
       @users = User.list
       @users.each do |user|
         if user.id == params[:user_id]
