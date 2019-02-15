@@ -19,9 +19,9 @@ class PendingBooking
     end
   end
 
-  def self.add(user_id:, property_id:, property_owner_id:, start_date:, end_date:, about_me:)
+  def self.add(user_id:, property_id:, property_owner_id:, start_date:, end_date:, about_me:, images:)
     result = Database.query( "INSERT INTO pending_bookings(user_id, property_id, property_owner_id, start_date, end_date, about_me, images) VALUES('#{user_id}', '#{property_id}', '#{property_owner_id}', '#{start_date}', '#{end_date}', '#{about_me}', '#{images}') RETURNING id, user_id, property_id, property_owner_id, start_date, end_date, about_me, images;")
-    PendingBooking.new(id: result[0]['id'], user_id: result[0]['user_id'], property_id: result[0]['property_id'], property_owner_id: result[0]['property_owner_id'], start_date: result[0]['start_date'], end_date: result[0]['end_date'], about_me: result[0]['about_me'], images: results[0]['images'])
+    PendingBooking.new(id: result[0]['id'], user_id: result[0]['user_id'], property_id: result[0]['property_id'], property_owner_id: result[0]['property_owner_id'], start_date: result[0]['start_date'], end_date: result[0]['end_date'], about_me: result[0]['about_me'], images: result[0]['images'])
   end
 
   def self.remove(id:)
