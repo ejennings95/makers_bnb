@@ -22,10 +22,6 @@ def self.list
     Properties.new(id: row['id'], name: row['name'], description: row['description'], price: row['price'], location: row['location'], property_owner_id: row['property_owner_id'], images: row['images'])
     end
   end
-  #
-  # def self.add_booking_date(id:, dates_booked:)
-  #   Database.query( "UPDATE properties SET dates_booked = '#{dates_booked}' WHERE id = '#{id}';")
-  # end
 
   def self.remove(id:)
     Database.query( "DELETE FROM properties WHERE id = '#{id}'" )

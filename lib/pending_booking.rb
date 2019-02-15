@@ -23,7 +23,6 @@ class PendingBooking
     PendingBooking.new(id: result[0]['id'], user_id: result[0]['user_id'], property_id: result[0]['property_id'], property_owner_id: result[0]['property_owner_id'], start_date: result[0]['start_date'], end_date: result[0]['end_date'], about_me: result[0]['about_me'])
   end
 
-
   def self.remove(id:)
     Database.query( "DELETE FROM pending_bookings WHERE id = '#{id}'" )
   end

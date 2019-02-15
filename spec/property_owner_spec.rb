@@ -9,4 +9,9 @@ describe PropertyOwner do
   it 'should be able to list all the property owners' do
     expect { PropertyOwner.add(name: 'owner1', username: 'propowner100', email: 'owner1@gmail.com', password: '123') }.to change { PropertyOwner.list.count }.by 1
   end
+
+  it 'should encrypt the password' do
+    owner = PropertyOwner.add(name: 'owner1', username: 'propowner100', email: 'owner1@gmail.com', password: '123')
+    expect(owner.password).to_not eq '123'
+  end
 end
