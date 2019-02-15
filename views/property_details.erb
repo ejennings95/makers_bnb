@@ -52,7 +52,7 @@
     </ul>
     <!-- The slideshow -->
     <% @property_list.each do |property| %>
-    <% if property.property_owner_id == @user_id %>
+    <% if property.id == @property_id %>
     <div class="carousel-inner">
       <div class="carousel-item active">
         <img src="<%= property.images %>" alt="Los Angeles" width="1100" height="500">
@@ -64,6 +64,9 @@
         <img src="<%= property.third %>" alt="New York" width="1100" height="500">
       </div>
     </div>
+    <% end %>
+    <% end %>
+
 
     <!-- Left and right controls -->
     <a class="carousel-control-prev" href="#demo" data-slide="prev">
@@ -74,8 +77,8 @@
     </a>
   </div>
   </div>
-  <% end %>
-  <% end %>
+
+
   <br>
   <div class="col-md-5 mx-auto">
   <article class="">
