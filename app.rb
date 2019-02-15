@@ -169,15 +169,25 @@ end
     @account_type = session[:account_type]
     if params[:account_type] == 'SIGN-UP TO ADVERTISE'
       user =  PropertyOwner.add(name: params[:name], username: params[:username], email: params[:email], password: params[:password])
-      session[:user_id] = user.id
-      redirect '/myproperties'
-    else
-      params[:account_type] == 'SIGN-UP TO RENT'
-      user = User.add(name: params[:name], username: params[:username], email: params[:email], password: params[:password])
-      session[:user_id] = user.id
-      redirect '/browse'
+      if user
+        session[:user_id] = user.id
+        redirect '/myproperties'
+      else
+        flash[:warning] = "Email address or username already in use - try another one."
+        redirect '/signup'
+      end
     end
-  end
+      if params[:account_type] == 'SIGN-UP TO RENT'
+        user = User.add(name: params[:name], username: params[:username], email: params[:email], password: params[:password])
+        if user
+          session[:user_id] = user.id
+          redirect '/browse'
+        else
+          flash[:warning] = "Email address or username already in use - try another one."
+          redirect '/signup'
+        end
+      end
+    end
 
     post ('/logout') do
       session.clear
