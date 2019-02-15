@@ -7,7 +7,7 @@ CREATE TABLE property_owner(id SERIAL PRIMARY KEY, name VARCHAR(60), username VA
 
 #properties table
 
-CREATE TABLE properties(id SERIAL PRIMARY KEY, name VARCHAR(60), description VARCHAR(6000), price INTEGER, location VARCHAR(500), property_owner_id INTEGER REFERENCES property_owner (id), dates_booked DATE, images VARCHAR(200));
+CREATE TABLE properties(id SERIAL PRIMARY KEY, name VARCHAR(60), description VARCHAR(6000), price INTEGER, location VARCHAR(500), property_owner_id INTEGER REFERENCES property_owner (id), dates_booked DATE, images VARCHAR(200), second VARCHAR(200), third VARCHAR(200));
 
 #user table
 

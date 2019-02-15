@@ -61,10 +61,11 @@ class Makersbnb < Sinatra::Base
     end
 
     get('/browse/:id') do
-      @picture_one = "http://i68.tinypic.com/2cfxngm.jpg"
-      @picture_two = "http://i67.tinypic.com/1zzrmev.jpg"
-      @picture_three = "http://i68.tinypic.com/2cfxngm.jpg"
+      # @picture_one = properties.images
+      # @picture_two = "http://i67.tinypic.com/1zzrmev.jpg"
+      # @picture_three = "http://i68.tinypic.com/2cfxngm.jpg"
       @account_type = session[:account_type]
+      @property_list = Properties.list
       @user_id = session[:user_id]
       @property = Properties.list.find { |property | property.id == session[:property_id]}
       @bookings = Booking.list
@@ -141,7 +142,7 @@ class Makersbnb < Sinatra::Base
 end
 
     post ('/add_property') do
-      Properties.add(name: params[:name], description: params[:description], location: params[:location], price: params[:price], property_owner_id: params[:prop_owner_id], images: params[:images])
+      Properties.add(name: params[:name], description: params[:description], location: params[:location], price: params[:price], property_owner_id: params[:prop_owner_id], images: params[:images], second: params[:second], third: params[:third])
       redirect ('/myproperties')
     end
 
