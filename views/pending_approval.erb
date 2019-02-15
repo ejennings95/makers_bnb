@@ -58,6 +58,7 @@
             <input type="hidden" name="check_in" value="<%= pending_booking.start_date %>">
             <input type="hidden" name="check_out" value="<%= pending_booking.end_date %>">
             <input type="hidden" name="about_me" value="<%= pending_booking.about_me%>">
+            <input type="hidden" name="images" value="<%= pending_booking.images %>">
             <input type="submit" value="APPROVE" class="btn btn-outline-success btn-block">
             </form>
             <form action="/bookingdeclined" method="post">
