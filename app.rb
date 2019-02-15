@@ -73,7 +73,7 @@ class Makersbnb < Sinatra::Base
         if booking.property_id == params[:property_id]
         conflict = ( Date.parse(booking.start_date) <= Date.parse(params[:check_out]) && (Date.parse(params[:check_in]) <= (Date.parse(booking.end_date))) )
           if conflict == true
-            # flash[:notice] = "Dates already booked - try another date."
+            flash[:notice] = "Dates already booked - try another date."
             redirect '/browse/:id'
           else
             PendingBooking.add(user_id: params[:user_id], property_id: params[:property_id], property_owner_id: params[:property_owner_id], start_date: params[:check_in], end_date: params[:check_out], about_me: params[:about_me])
