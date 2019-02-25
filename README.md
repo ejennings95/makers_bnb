@@ -71,3 +71,45 @@ As a property owner,
 So I can choose who to rent my property to,
 I want my property to remain advertised until I have approved booking.
 ```
+
+## Original wireframe
+
+Sign up page:
+
+![Mockup of individual story](public/images/Sign-up.png)
+
+Property list:
+
+![Mockup of individual story](public/images/Property-list.png)
+
+Property details:
+
+![Mockup of individual story](public/images/Property-details.png)
+
+Confirmation:
+
+![Mockup of individual story](public/images/Confirmation.png)
+
+My properties (additional for owner experience):
+
+![Mockup of individual story](public/images/My-properties.png)
+
+## Additions to wireframe
+
+Once the original wireframes were completed, we were able to add extra functionality to complete our users stories:
+
+Login:
+
+![Mockup of individual story](public/images/Login.png)
+
+My bookings:
+
+![Mockup of individual story](public/images/My-bookings.png)
+
+Pending bookings (additional for owner experience):
+
+![Mockup of individual story](public/images/Pending-bookings.png)
+
+## Database migration
+
+- [Link to our database setup and migration guide](https://github.com/JakePEGG/makers_bnb/blob/master/db/migration)
